@@ -1,2 +1,2 @@
 # laravel-up
-A repository with steps that will help one create a Laravel project via Homestead
+Step-by-step guide to help you create a local Laravel project via Homestead
