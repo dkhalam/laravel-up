@@ -73,11 +73,9 @@ Next we map our site that we will point to in our hosts file to the public folde
 
 Here's a link to helpful vagrant commands: https://www.vagrantup.com/docs/cli/
 
-8) Run 'vagrant ssh' command to login to vagrant. Type 'ls' to see a list of the contents of the current directory. You should notice the Projects folder there. To add a specific project, type this command 'composer create-project --prefer-dist laravel/laravel Project1'.
+8) Run 'vagrant ssh' command to login to vagrant. Type 'ls' to see a list of the contents of the current directory. You should notice the Projects folder there. Cd to Projects. To add a specific project, type this command 'composer create-project --prefer-dist laravel/laravel Project1'.
 
 This last command can take some time so be patient!
-
-You should now see 
 
 9) To be safe and make sure we have all our dependencies, still SSH'd in, type 'composer install' at the root of your project directory. 
 
