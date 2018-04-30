@@ -38,17 +38,56 @@ It is very important that you restart your PC after these downloads and installs
     
     Check the .ssh file in your C:\Users\USER_NAME\ directory to see your public and private key pair(s)
 
-5) Time to edit the Homestead.yaml file. 
+5) Time to edit the Homestead.yaml file. Go to the C:\Users\USER_NAME\Homestead directory. Now open the Homestead.yaml file with any text editor (I used Sublime Text, works just fine). As you go through the file you will notice these lines that correspond to your SSH keys. Make sure they align with the public and private key pair you would like to use. 
+        
+        authorize: c:/Users/USER_NAME/.ssh/id_rsa.pub
+        keys:
+        — c:/Users/USER_NAME/.ssh/id_rsa
+        
+        *** NOTE: be sure you use lowercase for our drive name (c) versus (C) and forward slashes (/) instead of backslashes (\) in this           instance
+        
+Next we will be mapping our desired folder/repo to be used to our vagrant folder, which will essentially be a copy of our local folder like so: 
 
-6)
+        folders:
+        — map: c:/Users/dkhalam/Projects
+        to: /home/vagrant/Projects
+        
+        ** Make sure you are not missing the colon after the c, as this silly mistake held me back the first time I tried this. 
+        
+You can use any folder name here, but for simplicity I have them as the same name. Any changes to one will be automatically routed and applied to the other. 
 
-7)
+Next we map our site that we will point to in our hosts file to the public folder in our project. So when you type local.project.com it will serve up our site!
 
-8)
+        sites:
+        — map: local.project.com
+        to: /home/vagrant/Projects/Project1/public
 
-9)
 
-10)
+6) We're getting to the point where we need to edit our hosts file and add our IP and desired site name. The hosts file can be found in C:\Windows\System32\drivers\etc\ folder, open it in Sublime or any other text editor in administrator mode, and add a new line for our new local site like so:
+        
+        192.168.10.10 local.project.com
+        
+        *** If you want to add another site, just append a dedicated new line to the bottom, that easy!
+
+7) Now we can run the 'vagrant up' and 'vagrant halt' commands to start and stop our instance. To do so, we have to always run these commands from the Homestead directory. 
+
+Here's a link to helpful vagrant commands: https://www.vagrantup.com/docs/cli/
+
+8) Run 'vagrant ssh' command to login to vagrant. Type 'ls' to see a list of the contents of the current directory. You should notice the Projects folder there. To add a specific project, type this command 'composer create-project --prefer-dist laravel/laravel Project1'.
+
+This last command can take some time so be patient!
+
+You should now see 
+
+9) To be safe and make sure we have all our dependencies, still SSH'd in, type 'composer install' at the root of your project directory. 
+
+Then, change env.example to .env. You can copy the contents from env.example easily via sublime and save it as a new file called '.env'. 
+
+Finally, run this command at the root of your project directory: 'php artisan key:generate' to set the APP_KEY value in your new .env file.
+
+10) Everything should be set, theoretically all our bases are covered, but ultimately each device is different. Type 'local.project.com' into the browser and with luck we will see our site!
+
+Thanks for following along, hope this was helpful!
 
 
 
